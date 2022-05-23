@@ -19,6 +19,7 @@ class DDL:
         self.Date = (Alist[7].split(':'))[-1]
         self.Remark = (Alist[8].split(':'))[-1]
         self.DDLContent = '\n'.join(Alist[11:])
+        self.DDLAllContent = '\n'.join(Alist[:])
         self.userName = ((file.split('\\')[-1]).split('-'))[1]
         self.Create = (Alist.split(' ')[0].lower()=='create')   #判断文件是否是create
 userDict={'OM':'orders','IM':'im','PM':'bespub','SUBSCRIPTION':'subs','BESCHARGE':'bescharge'}
