@@ -22,6 +22,8 @@ class TestExcel:
                 self.sheet.cell(row=self.sheet.max_row,column=column).value= self.DDL1.Author_2
             if column == 11:
                 self.sheet.cell(row=self.sheet.max_row,column=column).value= '江苏bes'
+            if column == 13:
+                self.sheet.cell(row=self.sheet.max_row,column=column).value= self.DDL1.userName
             if column == 14:
                 self.sheet.cell(row=self.sheet.max_row,column=column).value= '执行一次' 
             if column == 15:
