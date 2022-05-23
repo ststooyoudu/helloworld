@@ -1,8 +1,8 @@
 import os
 from pathlib import Path
 os.getcwd()
-file=r'/workspace/helloworld/00473-IM-(IM.OM.IM_RESERVE_BUSI_HIS_EX.REQ_2022_0206060_lwx997552.20220322103836.DDL)-Jiangsu_bes-swx552311.sql'
-userName = ((file.split('\\')[-1]).split('-'))[1]  #从文件里提取用户名
+# file=r'/workspace/helloworld/00473-IM-(IM.OM.IM_RESERVE_BUSI_HIS_EX.REQ_2022_0206060_lwx997552.20220322103836.DDL)-Jiangsu_bes-swx552311.sql'
+# userName = ((file.split('\\')[-1]).split('-'))[1]  #从文件里提取用户名
 class DDL:
     def __init__(self,file):
         Alist = []
@@ -20,12 +20,12 @@ class DDL:
         self.Remark = (Alist[8].split(':'))[-1]
         self.DDLContent = '\n'.join(Alist[11:])
         self.DDLAllContent = '\n'.join(Alist[:])
-        self.userName = ((file.split('\\')[-1]).split('-'))[1]   
+#        self.userName = ((file.split('\\')[-1]).split('-'))[1]   
         self.Alist=Alist
         self.Create = (Alist[11].split(' ')[0].lower()=='create')   #判断文件是否是create
 
 userDict={'OM':'orders','IM':'im','PM':'bespub','SUBSCRIPTION':'subs','BESCHARGE':'bescharge'}
-ddl1=DDL(file)
+#ddl1=DDL(file)
 #print(ddl1.DDLContent)
 #print(ddl1.Author_1)
 # print(ddl1.Author_2)
