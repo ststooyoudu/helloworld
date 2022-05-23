@@ -13,7 +13,8 @@ class DDL:
                 Alist.append(lineTemp)
         self.Story = (Alist[3].split(':'))[-1]
         self.DTS = (Alist[4].split(':'))[-1]
-        self.Author = (Alist[5].split(':'))[-1]
+        self.Author_1 = '_'.join(((Alist[5].split(':'))[-1]).splist('_'))[:-1]
+        self.Author_2 = ((Alist[5].split(':'))[-1]).splist('_')[-1]
         self.Name = (Alist[6].split(':'))[-1]
         self.Date = (Alist[7].split(':'))[-1]
         self.Remark = (Alist[8].split(':'))[-1]
