@@ -3,9 +3,12 @@ import shutil
 import time
 import zipfile
 from pathlib import Path
+from testexcel import TestExcel
 FileList=[]
+os.chdir(r'/workspace/helloworld/testpython')
 def scan_file():
     for f in os.listdir():  #由于这里是当前路径，所以需要把这个代码文件和你要处理的文件放到同一个文件夹里
+        print(f)
         if f.endswith('.zip'):
             unzip_it(f)
             delete(f)
@@ -21,9 +24,9 @@ def zip_filename():
         if f.endswith('.sql'):
             FileList.append(Path.cwd()/f)
 #print(scan_file())
-print(Path.home())
-print(os.path)
-print(Path.cwd())
+# print(Path.home())
+# print(os.path)
+# print(Path.cwd())
 while True:
     if scan_file():
         print('解压正常')
@@ -32,3 +35,7 @@ while True:
         break
 zip_filename()
 print(FileList)
+for ddl_name in FileList:
+     deal_excel=TestExcel('a.xlsx',ddl_name)
+#    print(ddl_name)
+
