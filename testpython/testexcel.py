@@ -1,11 +1,11 @@
 import openpyxl
-from sx.test_someting.testReadFile import DDL
+from testReadFile import DDL
 wb = openpyxl.load_workbook('a.xlsx')
 #sheet = wb.sheetnames[0]
 sheet = wb.active
 print(sheet)
 #sheet1 = wb.create_sheet('myNewSheet')
-DDL1=DDL(r'D:\下载\CUST\00422-OM-(OM.OM.OM_GRP_IMS_NUM_PICK_HIS_EX.REQ_2022_03144517_mwx584905.20220421201145.DDL)-Jiangsu_bes-l00293600.sql'
+DDL1=DDL(r'/workspace/helloworld/00473-IM-(IM.OM.IM_RESERVE_BUSI_HIS_EX.REQ_2022_0206060_lwx997552.20220322103836.DDL)-Jiangsu_bes-swx552311.sql'
 )
 for column in range(sheet.max_column+1):
     if column == 1:
