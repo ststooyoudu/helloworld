@@ -20,7 +20,7 @@ class DDL:
         self.Remark = (Alist[8].split(':'))[-1]
         self.DDLContent = '\n'.join(Alist[11:])
         self.DDLAllContent = '\n'.join(Alist[:])
-        self.userName = ((file.split('/')[-1]).split('-'))[1]   
+        self.userName = ((str(file).split('/')[-1]).split('-'))[1]   
         self.Alist=Alist
         self.Create = (Alist[11].split(' ')[0].lower()=='create')   #判断文件是否是create
         self.userDict = {'OM':'orders','IM':'im','PM':'bespub','SUBSCRIPTION':'subs','BESCHARGE':'bescharge'}
