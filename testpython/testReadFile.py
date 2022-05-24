@@ -23,7 +23,8 @@ class DDL:
         self.userName = ((str(file).split('/')[-1]).split('-'))[1]   
         self.Alist=Alist
         self.Create = (Alist[11].split(' ')[0].lower()=='create')   #判断文件是否是create
-        self.userDict = {'OM':'orders','IM':'im','PM':'bespub','SUBSCRIPTION':'subs','BESCHARGE':'bescharge'}
+        self.userDict = {'OM':['orders','crmdb1-4'],'IM':['im','resdb'],'PM':['prod','pubdb'],'SUBSCRIPTION':['subs','crmdb1-4'],'BESCHARGE':['bescharge','crmdb1-4'],'BESPRO':['bespro','pubdb'],'BESCUST':['cust','pubdb'],'COMMON':['sysmgr','pubdb'],'SM':['sysmgr','pubdb']}
         for k,v in self.userDict.items():
             if self.userName==k:
-                self.db_name=v       #数据库用户名
+                self.db_username=v[0]       #数据库用户名
+                self.db_name=v[1]          #数据库名
