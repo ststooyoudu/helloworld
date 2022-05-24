@@ -3,6 +3,7 @@ import shutil
 import time
 import zipfile
 from pathlib import Path
+import openpyxl
 from testexcel import TestExcel
 FileList=[]
 os.chdir(r'/workspace/helloworld/testpython')
@@ -36,6 +37,6 @@ while True:
 zip_filename()
 print(FileList)
 for ddl_name in FileList:
-     deal_excel=TestExcel('a.xlsx',ddl_name)
-#    print(ddl_name)
+    deal_excel=TestExcel('a.xlsx',ddl_name)
+#   userName = ((str(ddl_name).split('/')[-1]).split('-'))[1]  
 
