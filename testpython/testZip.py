@@ -5,6 +5,7 @@ import zipfile
 from pathlib import Path
 import openpyxl
 from testexcel import TestExcel
+from testexcel_newddl import TestExcel_NewDDL
 FileList=[]
 os.chdir(r'/workspace/helloworld/testpython')
 def scan_file():
@@ -24,10 +25,7 @@ def zip_filename():
     for f in os.listdir():
         if f.endswith('.sql'):
             FileList.append(Path.cwd()/f)
-#print(scan_file())
-# print(Path.home())
-# print(os.path)
-# print(Path.cwd())
+
 while True:
     if scan_file():
         print('解压正常')
@@ -37,6 +35,10 @@ while True:
 zip_filename()
 print(FileList)
 for ddl_name in FileList:
-    deal_excel=TestExcel('a.xlsx',ddl_name)
-#   userName = ((str(ddl_name).split('/')[-1]).split('-'))[1]  
+    deal_excel=TestExcel('a.xlsx',ddl_name)    #处理所有DDL
+    try:
+        deal_excel=TestExcel_NewDDL('b.xlsx',ddl_name)    #处理新建表DDL
+    except:
+        print("这个不是新增表，已忽略！")
+
 
