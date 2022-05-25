@@ -16,7 +16,7 @@ class TestExcel_NewDDL:
                 if column == 2:
                     self.sheet.cell(row=self.sheet.max_row,column=column).value= '618'
                 if column == 3:
-                    self.sheet.cell(row=self.sheet.max_row,column=column).value= 'cc'
+                    self.sheet.cell(row=self.sheet.max_row,column=column).value= self.DDL1.tablename
                 if column == 4:
                     self.sheet.cell(row=self.sheet.max_row,column=column).value= '永久表'
                 if column == 5:
