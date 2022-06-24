@@ -3,7 +3,27 @@ import zipfile
 import shutil
 import time
 from pathlib import Path
-dict={'interface':'202206232100.0.1','bes':'202206232100.0.1','app':'202206232100.0.1','web':'202206232100.0.1'}
+
+file = open('a.txt')
+dict={}
+for lines in file:
+#    print(lines,end='')
+    line=(lines.split(' '))#切割空格
+    name1=line[0].strip() #切割\n
+    name=line[0].split('\t') #切割\t
+    dictname=name[0]
+    dictvalue=name[1].strip('\n')
+    dict.setdefault(dictname,dictvalue)
+
+# print(dict)
+# for k,v in dict.items():
+#     print(k+':'+v)
+
+
+# a.split('/')
+# ['image=10.32.39.247:80', 'crm_raw', 'reportapp:22060806230617.1.3']
+# (a.split('/')[-1]).split(':')
+# ['reportapp', '22060806230617.1.3']
 
 defaultPath=os.getcwd()
 def scan_file():   #查询当前目录下所有zip包
@@ -28,23 +48,40 @@ def delete(f):
     os.unlink(f)  # 删除压缩包
 
 def deal_it(f,dict):   #处理文件,根据传过来的路径名，拼接文件路径
-    filename=os.path.join(os.getcwd(),f,f,'env\crm')
+    filename=os.path.join(os.getcwd(),f,'env\crm.env')
     print(filename)
     file=open(filename)
+    fileW = open(filename+'_temp','a')
     for lines in file:
+        if '/' not in lines:
+            fileW.writelines(lines)
         if '/' in lines:
-            print(lines,end='')
-            line=lines.strip('/')[-1]
-            print(line)
-            name=line.strip(':')[0]
-            value = line.strip(':')[0]
+            tempvalube =lines
+            tempvalube_pre=tempvalube.rsplit(':',1)  #切割原始行一直到‘:’
+            line=(lines.strip()).split('/')[-1]
+            print(line,end='')
+            name=line.split(':')[0]    #镜像名
+            value = line.split(':')[1]  #镜像号
             if name in dict:
                 value=value.replace(value,dict[name])
+                tempvalube_pre=str(tempvalube_pre[0])+':'+dict[name] #拼接整行
                 print(value)
+            fileW.writelines(tempvalube_pre+'\n')
+    file.close()
+    fileW.close()
+    delete(filename)  #删除原始文件
+    rename(filename)  # 将temp文件重命名为原文件名
+
+def rename(f):
+    try:
+        os.rename(f+'_temp',f)
+        print("重命名完毕")
+    except(FileNotFoundError):
+        print("temp文件不存在")
 
 def zip_it(f):   #压缩回文件，先删除原有zip，再重新压缩回去
     f = (f.split('.'))[0]
     shutil.make_archive(f,'zip',f)
-    print('a')
+
 
 scan_file()
