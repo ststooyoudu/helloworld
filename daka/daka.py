@@ -26,7 +26,7 @@ def send_text(value,text):   #输入函数
 def check_in(user,passwd):
     ##########################进入主站
     if check_net() == 200:
-        driver.get('http://xxhapp.js.cmcc:30002/jsjz-web/login')
+        driver.get('http://xxxx.com')
         driver.maximize_window()
         time.sleep(4)
         send_text('/html/body/div[2]/form/div[1]/div/input',user)
