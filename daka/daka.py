@@ -12,7 +12,7 @@ import schedule
 
 s =Service('C:\selenium\console-test\lib\chromedriver.exe')
 driver = webdriver.Chrome(service=s)
-account_items={'hw_sunxing':'3edc#EDC','hw_mengyuhao':'1qaz@WSX','hw_xuhao':'3edc#EDC','hw_liuzongren':'1qaz!QAZ'}
+account_items={'sunxing':'3edc#EDC','mengyuhao':'1qaz@WSX'}
 
 
 def click_button(value): #点击函数
@@ -45,7 +45,7 @@ def check_in(user,passwd):
 def check_out(user,passwd):
     ##########################进入主站
     if check_net() == 200:
-        driver.get('http://xxhapp.js.cmcc:30002/jsjz-web/login')
+        driver.get('http://xxxxxx.com')
         driver.maximize_window()
         time.sleep(1)
         send_text('/html/body/div[2]/form/div[1]/div/input',user)
@@ -87,7 +87,7 @@ def check_net():
         requests.packages.urllib3.disable_warnings()  #忽视警告
         ss = requests.session()
         ss.keep_alive = False
-        response = requests.get("http://xxhapp.js.cmcc:30002/jsjz-web/login",verify=False)
+        response = requests.get("http://xxxx.com",verify=False)
         if response.status_code == 200:
             print("网络正常！")
             return 200
