@@ -13,21 +13,21 @@ class DDL:
                 Alist.append(lineTemp)
         self.Story = (Alist[3].split(':'))[-1]
         self.DTS = (Alist[4].split(':'))[-1]
-        self.Author_1 = '_'.join((((Alist[5].split(':'))[-1]).split('_'))[:-1])   #需求编号
-        self.Author_2 = ((Alist[5].split(':'))[-1]).split('_')[-1]     #开发名字
-        self.Name = (Alist[6].split(':'))[-1]
-        self.Date = (Alist[7].split(':'))[-1]
-        self.Remark = (Alist[8].split(':'))[-1]
-        self.DDLContent = '\n'.join(Alist[11:])
+#        self.Author_1 = '_'.join((((Alist[5].split(':'))[-1]).split('_'))[:-1])   #需求编号
+        self.Author_2 = ((Alist[5].split(':'))[-1])    #需求编号
+        self.Name = (Alist[6].split(':'))[-1]    #开发名字
+        self.Date = (Alist[8].split(':'))[-1]
+        self.Remark = (Alist[10].split(':'))[-1]
+        self.DDLContent = '\n'.join(Alist[13:])
         self.DDLAllContent = '\n'.join(Alist[:])
         self.userName = ((str(file).split('/')[-1]).split('-'))[1]   
         self.Alist=Alist
-        self.Create = (Alist[11].split(' ')[0].lower()=='create')   #判断文件是否是create
-        self.isTable = (Alist[11].split(' ')[1].lower()=='table')
-        self.userDict = {'OM':['orders','crmdb1-4'],'IM':['im','resdb'],'PM':['prod','pubdb'],'SUBSCRIPTION':['subs','crmdb1-4'],'BESCHARGE':['bescharge','crmdb1-4'],'BESPRO':['bespro','pubdb'],'BESCUST':['cust','pubdb'],'COMMON':['sysmgr','pubdb'],'SM':['sysmgr','pubdb']}
+        self.Create = (Alist[13].split(' ')[0].lower()=='create')   #判断文件是否是create
+        self.isTable = (Alist[13].split(' ')[1].lower()=='table')
+        self.userDict = {'OM':['orders','crmdb1-4'],'IM':['im','resdb'],'PM':['prod','pubdb'],'SUBSCRIPTION':['subs','crmdb1-4'],'BESCHARGE':['bescharge','crmdb1-4'],'BESPRO':['bespro','pubdb'],'BESCUST':['cust','pubdb'],'COMMON':['sysmgr','pubdb'],'SM':['sysmgr','pubdb'],'SHOPCART':['shopcart','crmdb1-4'],'BESPAY':['bespay','crmdb1-4'],'BESPUB':['bespub','pubdb']}
         for k,v in self.userDict.items():
             if self.userName==k:
                 self.db_username=v[0]       #数据库用户名
                 self.db_name=v[1]          #数据库名
         if self.Create and self.isTable:  #如果是新增表，记录新增表名
-            self.tablename=Alist[11].split(' ')[2]
+            self.tablename=Alist[13].split(' ')[2]
