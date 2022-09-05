@@ -9,9 +9,9 @@ class TestExcel:
         self.DDL1=DDL(ddl_name)
         for column in range(self.sheet.max_column+1):
             if column == 1:
-                self.sheet.cell(row=self.sheet.max_row+1,column=column).value=self.DDL1.Author_1
+                self.sheet.cell(row=self.sheet.max_row+1,column=column).value=self.DDL1.Author_2
             if column == 2:
-                self.sheet.cell(row=self.sheet.max_row,column=column).value= self.DDL1.Author_1
+                self.sheet.cell(row=self.sheet.max_row,column=column).value= self.DDL1.Author_2
             if column == 3:
                 self.sheet.cell(row=self.sheet.max_row,column=column).value= self.DDL1.Remark
             if column == 5:
@@ -19,7 +19,7 @@ class TestExcel:
             if column == 7:
                 self.sheet.cell(row=self.sheet.max_row,column=column).value= self.DDL1.DDLAllContent
             if column == 8:
-                self.sheet.cell(row=self.sheet.max_row,column=column).value= self.DDL1.Author_2
+                self.sheet.cell(row=self.sheet.max_row,column=column).value= self.DDL1.Name
             if column == 11:
                 self.sheet.cell(row=self.sheet.max_row,column=column).value= '江苏bes'
             if column == 12:
