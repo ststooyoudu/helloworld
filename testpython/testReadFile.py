@@ -24,7 +24,7 @@ class DDL:
         self.Alist=Alist
         self.Create = (Alist[13].split(' ')[0].lower()=='create')   #判断文件是否是create
         self.isTable = (Alist[13].split(' ')[1].lower()=='table')
-        self.userDict = {'OM':['orders','crmdb1-4'],'IM':['im','resdb'],'PM':['prod','pubdb'],'SUBSCRIPTION':['subs','crmdb1-4'],'BESCHARGE':['bescharge','crmdb1-4'],'BESPRO':['bespro','pubdb'],'BESCUST':['cust','pubdb'],'COMMON':['sysmgr','pubdb'],'SM':['sysmgr','pubdb'],'SHOPCART':['shopcart','crmdb1-4'],'BESPAY':['bespay','crmdb1-4'],'BESPUB':['bespub','pubdb'],'BESINVOICE':['besinvoice','crmdb1-4'],'BESSMS':['bessms','crmdb1-4'],'BESGRPCUST':['besgrpcust','crmdb1-4'],'BESAUDIT':['besaudit','crmdb1-4'],'BESOPM':['besopm','crmdb1-4'],'BESRECEIPT':['besreceipt','crmdb1-4'],'BESREPORT':['besreport','crmdb1-4'],'MEMBER':['member','pubdb']}
+        self.userDict = {'CM':['cust','crmdb1-4'],'OM':['orders','crmdb1-4'],'IM':['im','resdb'],'PM':['prod','pubdb'],'SUBSCRIPTION':['subs','crmdb1-4'],'BESCHARGE':['bescharge','crmdb1-4'],'BESPRO':['bespro','pubdb'],'BESCUST':['cust','pubdb'],'COMMON':['sysmgr','pubdb'],'SM':['sysmgr','pubdb'],'SHOPCART':['shopcart','crmdb1-4'],'BESPAY':['bespay','crmdb1-4'],'BESPUB':['bespub','pubdb'],'BESINVOICE':['besinvoice','crmdb1-4'],'BESSMS':['bessms','crmdb1-4'],'BESGRPCUST':['besgrpcust','crmdb1-4'],'BESAUDIT':['besaudit','crmdb1-4'],'BESOPM':['besopm','crmdb1-4'],'BESRECEIPT':['besreceipt','crmdb1-4'],'BESREPORT':['besreport','crmdb1-4'],'MEMBER':['member','pubdb']}
         for k,v in self.userDict.items():
             if self.userName==k:
                 self.db_username=v[0]       #数据库用户名
