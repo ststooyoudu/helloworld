@@ -10,12 +10,6 @@ port = 5002   # 1~1024多数会被系统占用，不建议用
 #文件传输的缓冲区（传输不是一个字节一个字节传，而是一整个buffer）
 buffer_size = 1024
 
-# 传输文件
-filename = r"D:\stable diffusion\novelai-webui-aki-v3\models\Stable-diffusion\chilloutmix_NiPrunedFp32Fix.safetensors"
-
-# 文件大小
-file_size = os.path.getsize(filename)
-
 # 创建socket连接
 s = socket.socket()
 
@@ -23,6 +17,13 @@ s = socket.socket()
 print(f"服务器连接中{host}:{port}")
 s.connect((host, port))
 print("与服务器连接成功!")
+
+# 传输文件
+filename = input('请输入需要上传的文件的绝对路径：')
+#filename = r"D:\stable diffusion\novelai-webui-aki-v3\models\Stable-diffusion\chilloutmix_NiPrunedFp32Fix.safetensors"
+
+# 文件大小
+file_size = os.path.getsize(filename)
 
 # 发送文件名字和文件大小，必须进行编码处理encode()
 s.send(f"{filename}{separator}{file_size}".encode())
