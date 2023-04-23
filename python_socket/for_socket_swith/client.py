@@ -11,8 +11,8 @@ port = 5002   # 1~1024多数会被系统占用，不建议用
 buffer_size = 1024
 
 # 传输文件
-filename = r"F:\stable diffusion\novelai-webui-aki-v3\models\Stable-diffusion\dalcefoV3Painting_dalcefoV3Painting.safetensors"
-
+filename = r"F:\stable diffusion\novelai-webui-aki-v3\models\Stable-diffusion\yoneyamaMaiStyle_yoneyamaMaiV2Locon.safetensors"
+#filename = input('请输入需要上传文件的绝对路径：')
 # 文件大小
 file_size = os.path.getsize(filename)
 
