@@ -1,4 +1,4 @@
-import socket, tqdm, os
+import socket, tqdm, os,time
 
 # 传输数据分隔符
 separator = "<separator>"
@@ -11,7 +11,7 @@ port = 5002   # 1~1024多数会被系统占用，不建议用
 buffer_size = 1024
 
 # 传输文件
-filename = r"F:\stable diffusion\novelai-webui-aki-v3\models\Stable-diffusion\yoneyamaMaiStyle_yoneyamaMaiV2Locon.safetensors"
+filename = r"F:\stable diffusion\novelai-webui-aki-v3\models\Stable-diffusion\revAnimated_v121.safetensors"
 #filename = input('请输入需要上传文件的绝对路径：')
 # 文件大小
 file_size = os.path.getsize(filename)
@@ -39,6 +39,7 @@ with open(filename, "rb") as f:
         # sendall()可以确保即使网络拥堵，数据仍然可以传输
         s.sendall(bytes_read)
         progress.update(len(bytes_read))    # 按照读的大小 更新进度条
-
+print('传输完成！')
 # 关闭资源
 s.close()
+time.sleep(10)
