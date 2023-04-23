@@ -1,4 +1,4 @@
-import socket, os,tqdm
+import socket, os
 from threading import Thread
 
 # 传输数据分隔符
@@ -37,17 +37,17 @@ def run(s):
 
 def recv_date(filename,file_size,client_socket):
     # 文件接收处理
-    progress = tqdm.tqdm(range(file_size), f"接收{filename}", unit="B", unit_divisor=1024, unit_scale=True)
+#    progress = tqdm.tqdm(range(file_size), f"接收{filename}", unit="B", unit_divisor=1024, unit_scale=True)
 
     with open("bak_"+filename, "wb") as f:     # 写入
-        for _ in progress:
-            # 从客户端读取数据
+#        for _ in progress:
+        # 从客户端读取数据
+        while True:
             bytes_read = client_socket.recv(buffer_size)
             if not bytes_read:      # 读取结束
                 break
-
             f.write(bytes_read)
-            progress.update(len(bytes_read))
+    #            progress.update(len(bytes_read))
 
     # 关闭资源，先关闭客户端，再关闭服务器
     client_socket.close()
