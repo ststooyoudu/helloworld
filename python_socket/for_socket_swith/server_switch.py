@@ -1,44 +1,71 @@
-import socket, tqdm, os
+import socket, os,tqdm
+from threading import Thread
 
 # 传输数据分隔符
 separator = "<separator>"
 
 # 服务器信息
-host = "127.0.0.1"
-port = 5002   # 1~1024多数会被系统占用，不建议用
+server_host = "127.0.0.1"
+server_port = 5002   # 1~1024多数会被系统占用，不建议用
 
-#文件传输的缓冲区（传输不是一个字节一个字节传，而是一整个buffer）
-buffer_size = 1024
+# 文件传输的缓冲区（传输不是一个字节一个字节传，而是一整个buffer）
+buffer_size = 4096
 
-# 传输文件
-filename = r"F:\stable diffusion\novelai-webui-aki-v3\models\Stable-diffusion\dalcefoV3Painting_dalcefoV3Painting.safetensors"
-
-# 文件大小
-file_size = os.path.getsize(filename)
-
-# 创建socket连接
+# 创建的Server和client
 s = socket.socket()
+s.bind((server_host, server_port))  # 服务器绑定端口
 
-# 连接服务器
-print(f"服务器连接中{host}:{port}")
-s.connect((host, port))
-print("与服务器连接成功!")
+# 设置连接监听数
+s.listen(5)
+print(f"服务器端监听{server_host}:{server_port}")
 
-# 发送文件名字和文件大小，必须进行编码处理encode()
-s.send(f"{filename}{separator}{file_size}".encode())
+def run(s):
+    # 接受客户端连接
+    while True:
+        client_socket, address = s.accept()     # 哪一个客户的socket, ip地址
+        print(f"客户端{address}连接。")# 打印客户端ip
 
-# 文件传输，用tqdm提示发送进度，传输单位Byte（1024表示1Byte=1024bit）
-progress = tqdm.tqdm(range(file_size), f"发送{filename}", unit="B", unit_divisor=1024)
+        #连接服务器
+        s_client = socket.socket()
+        s_client.connect(('127.0.0.1',9999))
+        print(f"服务器{server_host}连接成功。")# 打印服务器ip
 
-with open(filename, "rb") as f:
+        # 接收客户端信息
+        received = client_socket.recv(buffer_size).decode()     # 解码
+        s_client.sendall(received.encode())
+
+        filename, file_size = received.split(separator)         # 客户端用separator分割的
+        filename = os.path.basename(filename)                   # 获取文件的名字，去除路径
+        file_size = int(file_size)      # 传输过来的是字符串类型
+        th = Thread(target=recv_date,args=(filename,file_size,client_socket,s_client))
+        th.start()
+        th.join()
+
+
+
+def recv_date(filename,file_size,client_socket,s_client):
+    # 文件接收处理
+    progress = tqdm.tqdm(range(file_size), f"接收{filename}", unit="B", unit_divisor=1024, unit_scale=True)
+
+
     for _ in progress:
-        # 读取文件
-        bytes_read = f.read(buffer_size)    # 一次读取buffer_size大小的
-        if not bytes_read:      # 读取不到就退出
+        # 从客户端读取数据
+        bytes_read = client_socket.recv(buffer_size)
+        if not bytes_read:      # 读取结束
             break
-        # sendall()可以确保即使网络拥堵，数据仍然可以传输
-        s.sendall(bytes_read)
-        progress.update(len(bytes_read))    # 按照读的大小 更新进度条
 
-# 关闭资源
-s.close()
+        s_client.sendall(bytes_read)
+        progress.update(len(bytes_read))
+
+    # 关闭资源，先关闭客户端，再关闭服务器
+    client_socket.close()
+#s.close()
+
+run(s)
+
+
+
+
+
+
+
