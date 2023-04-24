@@ -1,4 +1,3 @@
-# helloworld
 
 ## linux安装python
 - 1、下载python的二进制安装包 
